@@ -2,6 +2,7 @@
 
 The following repository is for Anon Communicator application which mints annonymous messages that can then be sent between NFT owner and interestedy party to start a correspondence or show interest in the NTF.  
 
+![annon_communicator](Images/anon_communicator.jpg)
 
 # Anon Communicator: new application 
 
@@ -47,7 +48,16 @@ python -m http.server
 
 ## Contributors
 
-Brought to you by 
+Aheesh Nagraj -- https://github.com/Aheesh
+
+Owen Wardlaw -- https://github.com/owardlaw
+
+Stephen Miyumo -- https://github.com/odhissm
+
+Israel Fernandez -- https://github.com/codan81
+
+Noah Beito -- https://github.com/noahbeito
+
 
 ---
 
