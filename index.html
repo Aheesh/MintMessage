@@ -9,7 +9,10 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js" 
       integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw==" 
       crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
+      referrerpolicy="no-referrer"
+      data-main="scripts/app" 
+      src="/Users/smiyumo/workarea/cmd/fintech/bootcamp/Fintech-Workspace/Python_Project/scripts/require.js"
+      >
     </script>
 
     <meta charset="UTF-8" />
@@ -139,8 +142,8 @@
         <label for="messageArea">Message Area</label>
         <textarea id="messageArea" name="SenderMessage" rows="7" cols="30">Message for the NFT Owner</textarea><br>
     
-        <input type="button" id='sendButton' onclick="buildJson()" class="button" value="Send Message">
-        <input type="button" id='URI' onclick="URI()" class="button" value="Get URI">
+        <input type="button" id='sendButton' onclick="uriFetch()" class="button" value="Send Message">
+        <!--input type="button" id='URI' onclick="URI()" class="button" value="Get URI"-->
     
       </div>
     </div>
@@ -150,6 +153,7 @@
     <!-- <script src="./script.js"></script> -->
 
     <script>
+      const { contractAddress } = require('./config');
       function buildJson() {
         var y = document.getElementById("messageArea").value;
         var x = document.getElementById("recepientAddress").value;
@@ -255,7 +259,106 @@
         document.getElementById("mySidenav").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
         document.body.style.backgroundColor = "white";
-      }      
+      } 
+      
+      
+//****************************************
+//**************************************
+
+
+/*const displayGreeting = async (greeting, contract) => {
+    greeting = await contract.methods.sayHello().call();
+    $("h2").html(greeting);
+  };
+ */
+
+ const mintArt = async (contract, accounts) => {
+    //let input;
+    //var y = document.getElementById("messageArea").value;
+    var x = document.getElementById("recepientAddress").value;
+  
+
+
+
+    //var x ="0xF151ba2c9aC8188169F8C9103cc2FA8749ceCF42";
+    //$("#input").on("change", (e) => {
+     // input = e.target.value;
+    //});
+    //$("#form").on("submit", async (e) => {
+     // e.preventDefault();
+      console.log("mintArt printing contract object:",contract);
+      await contract.methods.registerArtwork(x,"https://ipfs.io/ipfs/Qmf3N4HHLCVPku2oeFXGeVDVLZwVN7cNCMbcxg4Hg2tRsz")
+        .send({ from: window.userAddress, gas: 40000 });
+      //displayGreeting(greeting, contract);
+  };
+  
+  const getContract = async (web3) => {
+    
+    // Load the abi file
+   // const data = await $.getJSON("./contracts/artwork_abi.json");
+    //var getContract_abi = await fetch("./contracts/abi.json");
+
+    const {getContract_abi} = require("./contracts/compiled/artwork_abi.json")
+    .then(response => response
+    .json()).then(data => console
+    .log(data)).catch(err => console
+    .log(err));
+    //var getContract_abi = require("./contracts/abi.json");
+    
+    console.log("getContract() --> ",getContract_abi.JSON);
+    //console.log("getContract() typeof check--> ",typeof(JSON.parse(getContract_abi)));
+    //console.log("getContract() ---> what is JSON of getContract_abi.ABI",typeof(JSON.parse(getContract_abi).abi) );
+    
+    //.then(response => response.json())
+    //.then(json => {
+    //    console.log(json);
+    //    artContract=myCallback(web3,json);
+    //})
+    //.catch((error) => {
+    //    console.error('Error:', error)
+    //  });
+    
+    //const netId = await web3.eth.net.getId();
+    //const deployedNetwork = data.networks[netId];
+    const artContract = await new web3.eth.Contract(JSON.parse(getContract_abi),contractAddress);
+    //JSON.parse(abi),"0x27FBB6f60db3fE91b849f2e52eC164F4B6051461"
+        // data.abi,
+    //  deployedNetwork && deployedNetwork.address
+    //);
+    console.log("getContract()--> What is contract",artContract);  
+    return artContract;
+  };
+  //function myContractFetcher(web3,data) {
+  //  console.log("callback object",data); 
+  //  const artContract = new web3.eth.Contract(
+  //      data,"0x27FBB6f60db3fE91b849f2e52eC164F4B6051461");
+  //  console.log("myContractFetcher --> What is contract",artContract);  
+
+ //   return artContract; 
+//  }
+ 
+
+  async function greetingApp() {
+    const web3 = await getWeb3();
+    console.log("web3",web3);
+    const accounts = await web3.eth.getAccounts();
+    console.log("accounts",accounts)
+    const contract = await getContract(web3);
+    //let artToken;
+    console.log("What is contract in the greetingApp()",contract);
+    //displayGreeting(greeting, contract);
+
+    console.log("What is accounts",accounts);
+    mintArt(contract, accounts);
+  }
+  
+  
+
+  greetingApp();
+
+
+//*************************************
+//**************************************
 
      </script>
 </body>
