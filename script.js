@@ -1,3 +1,5 @@
+import jsondata from './contracts/compiled/artwork_abi.json'
+
 async function loginWithEth() {
   if (window.ethereum) {
     window.web3 = new Web3(ethereum);
@@ -10,3 +12,4 @@ async function loginWithEth() {
   } else {
     alert('No Eth Browser Extension detected');
   }
+}
