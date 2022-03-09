@@ -1,4 +1,4 @@
-function URI_Fetch() 
+ function URI_Fetch(myCallback) 
 {
     var y = document.getElementById("messageArea").value;
     var x = document.getElementById("recepientAddress").value;
@@ -10,13 +10,13 @@ function URI_Fetch()
 
     const myObj = JSON.parse(f);
     document.getElementById("demo").innerHTML = myObj.address; 
-
+    var pinData;
     fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', {
     method: 'POST', // or 'PUT'
     headers: {
       'Content-Type': 'application/json',
-      'pinata_api_key': "217fd00b10cbda055867",
-      'pinata_secret_api_key': "b0f986ab98c4a8fc2b4aab1dc85accdd0669602be671c13c8273f86c5b851d07"
+      'pinata_api_key': "26689a58bbd3e05207c5",
+      'pinata_secret_api_key': "622c0634c379b1139f92dfd22f6dd79dd600df1eb09bec13cb70456a5e3835fa"
     }, 
     body: JSON.stringify(myObj),
     })
@@ -24,10 +24,46 @@ function URI_Fetch()
     .then(data => {
 
     console.log('Success:',data);
-    console.log('IpfsHash:',data.IpfsHash);
-    console.log('Timestamp',data.Timestamp);
+    pinData=data;
+    console.log('IpfsHash:',pinData.IpfsHash);
+    console.log('Timestamp',pinData.Timestamp);
+    myCallback(data)
     })
     .catch((error) => {
     console.error('Error:', error);
     });
+
+    /*var messageUri = await fetch('https://api.pinata.cloud/pinning/pinJSONToIPFS', {
+      method: 'POST', // or 'PUT'
+      headers: {
+        'Content-Type': 'application/json',
+      'pinata_api_key': "26689a58bbd3e05207c5",
+      'pinata_secret_api_key': "622c0634c379b1139f92dfd22f6dd79dd600df1eb09bec13cb70456a5e3835fa"
+
+      },
+     body: JSON.stringify(myObj), 
+    })
+
+    console.log('Success:',messageUri);
+    console.log('IpfsHash:',messageUri.IpfsHash);
+    console.log('Timestamp',messageUri.Timestamp);*/
+
+
+    //Message posted on pinata. Now call Mint function.
+    
+}
+
+async function myDisplayer(some) {
+  document.getElementById("demo").innerHTML = some.IpfsHash;
+  document.getElementById("demo2").innerHTML = some.Timestamp;
+  console.log("callback object",some);
+  
+  var x = document.getElementById("recepientAddress").value;
+  console.log("myDisplayer--> address",x);
+  console.log("-----calling mintNFT() function -----",x,some.IpfsHash)
+  //var confirm= await 
+  mintNFT(x,some.IpfsHash);
+
+  console.log("-----AFTER calling mintNFT() function -----",confirm)
+
 }

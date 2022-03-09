@@ -5,7 +5,15 @@
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <script 
+    <script type="text/javascript" src="./utils.js"></script>
+    <script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>
+    <!--<script src="node_modules/@alch/alchemy-web3/dist/alchemyWeb3.min.js"></script>-->
+    
+    <script type="text/javascript" src="./uriFetch.js"></script>
+    <script type="text/javascript" src="./mint.js"></script>
+    
+
+    <!--<script 
       src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js" 
       integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw==" 
       crossorigin="anonymous" 
@@ -13,8 +21,9 @@
       data-main="scripts/app" 
       src="/Users/smiyumo/workarea/cmd/fintech/bootcamp/Fintech-Workspace/Python_Project/scripts/require.js"
       >
-    </script>
-
+    </script>-->
+    
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -137,22 +146,21 @@
          Logout
         </button>        
         <label for="recepientAddress">Recipient Address</label>
-        <input type="text" id="recepientAddress" name="recepientAddress" value="Please type the recipient wallet address here"><br>
+        <input type="text" id="recepientAddress" name="recepientAddress" value="0xCDE58FC11b7Ce950D0E872e16Bb0B2418F4f1352"><br>
     
         <label for="messageArea">Message Area</label>
-        <textarea id="messageArea" name="SenderMessage" rows="7" cols="30">Message for the NFT Owner</textarea><br>
+        <textarea id="messageArea" name="SenderMessage" rows="7" cols="30">Message for the NFT Owner - Interested, will pay 10 ETH</textarea><br>
     
-        <input type="button" id='sendButton' onclick="uriFetch()" class="button" value="Send Message">
+        <input type="button" id='sendButton' onclick="URI_Fetch(myDisplayer)" class="button" value="Send Message">
         <!--input type="button" id='URI' onclick="URI()" class="button" value="Get URI"-->
     
       </div>
     </div>
   </div>
     <p id="demo"></p>
+    <p id="demo2"></p>
 
-    <!-- <script src="./script.js"></script> -->
-
-    <script>
+    <!--<script>
       const { contractAddress } = require('./config');
       function buildJson() {
         var y = document.getElementById("messageArea").value;
@@ -166,6 +174,9 @@
         document.getElementById("demo").innerHTML = myObj.address;
         //document.getElementById("demo").innerHTML = myObj.message;
       }
+      </script>-->
+
+      <!--<script>
 
       window.userAddress = null;
       const loginButton = document.getElementById('loginButton')
@@ -235,8 +246,9 @@
         } else {
           alert("No ETH brower extension detected.");
         }
-      }   
+      }  -->
       
+      <script>
       /* Set the width of the side navigation to 250px */
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -261,9 +273,6 @@
         document.body.style.backgroundColor = "white";
       } 
       
-      
-
-
      </script>
 </body>
 </html>
