@@ -35,8 +35,21 @@ async function mintNFT(tokenURI) {
   const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
   const transactionReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
   
-  console.log(`Transaction receipt: ${JSON.stringify(transactionReceipt)}`);
+//   console.log(`Transaction receipt: ${JSON.stringify(transactionReceipt)}`);
+
+  var tokens = await nftContract.methods.balanceOf(PUBLIC_KEY).call();
+      console.log("No . of tokens: ",tokens," :for account",PUBLIC_KEY);
+
+    for (let i = 0; i < tokens; i++) {
+
+        token_uri = await nftContract.methods.tokenURI(i).call();
+
+        console.log("Token URI: ", token_uri, "Value: " ,i);
+    }
+
+
 }
 
 //step 5: Call the mintNFT function
-//mintNFT("https://gateway.pinata.cloud/ipfs/Qmeou5f7ttU98n96mYWfYzKHV7pfRe5rcZBhYznHZCUV7M");
+mintNFT("ipfs.io/ipfs/QmVHfZxFXhoGMzaMyjLV547hGRTjKmZe8mYAk65npuxcW3");
+
