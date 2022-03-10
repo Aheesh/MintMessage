@@ -148,9 +148,6 @@
         <br>
         <p>Recipient Address: <span id="recepientAddress"></span></p><br>
         <p>Message Sent: <span id="messageText"></span></p><br>
-        <p>IpfsHash: <span id="IpfsHash"></span></p><br>
-        <p>Timestamp: <span id="Timestamp"></span></p><br>
-        <p>NFT: <span id="token_uri"></span></p><br>
 
         <script>
           var recepientAddress = sessionStorage.getItem("recepientAddress");
@@ -159,6 +156,10 @@
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;          
         </script>
+
+        <p>IpfsHash: <span id="IpfsHash"></span></p><br>
+        <p>Timestamp: <span id="Timestamp"></span></p><br>
+        <p>NFT: <span id="token_uri"></span></p><br>
 
         <script>
           var IpfsHash =  sessionStorage.getItem("IpfsHash");
