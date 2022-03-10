@@ -63,6 +63,7 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
   var tokens = await nftContract.methods.balanceOf(accounts[0]).call();
       console.log("No . of tokens: ",tokens," :for account",accounts[0]);
       var myTokens = [];
+      var strTokens = '<ul>';
 
     for (let i = 0; i < tokens; i++) {
 
@@ -70,10 +71,13 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
         console.log("Token URI: ", token_uri, "Value: " ,i);
         myTokens.push(token_uri);
+        strTokens += '<li>'+ token_uri + '</li>';
         
     }
+    strTokens += '</ul>';
     sessionStorage.setItem("token_uri", token_uri);
     sessionStorage.setItem("myTokens", myTokens);
+    sessionStorage.setItem("strTokens", strTokens);
 
 
 }

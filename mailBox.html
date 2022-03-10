@@ -132,27 +132,30 @@
          Logout
         </button>        
         <br>
-        <p>Recipient Address: <span id="recepientAddress"></span></p><br>
-        <p>Message Sent: <span id="messageText"></span></p><br>
-        <!--p>IpfsHash: <span id="IpfsHash"></span></p><br>
-        <p>Timestamp: <span id="Timestamp"></span></p--><br>
+        <!--p>Recipient Address: <span id="recepientAddress"></span></p><br>
+        <p>Message Sent: <span id="messageText"></span--></p><br>
+        <div id="NFTs"></div>
 
         <script>
-          var recepientAddress = sessionStorage.getItem("recepientAddress");
-          var messageText = sessionStorage.getItem("messageText");
+          //var recepientAddress = sessionStorage.getItem("recepientAddress");
+          //var messageText = sessionStorage.getItem("messageText");
+          var strTokens = sessionStorage.getItem("strTokens");
           
           
           var myTokens = sessionStorage.getItem("myTokens");
-          document.getElementById("recepientAddress").innerHTML = recepientAddress;
-          document.getElementById("messageText").innerHTML = messageText;
+          //document.getElementById("recepientAddress").innerHTML = recepientAddress;
+          //document.getElementById("messageText").innerHTML = messageText;
+          document.getElementById("NFTs").innerHTML = strTokens;
           
           
 
 
           // Loop through persons array and display all the values
-          for(var i = 0; i < myTokens.length; i++){
+         /* for(var i = 0; i < myTokens.length; i++){
               document.write("<p>NFT " + i + " : " + myTokens[i] + "</p><br>");
+              str = '<li>'+ myTokens[i] + '</li>';
             }
+            */
 
         </script>
   
