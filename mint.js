@@ -62,13 +62,18 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
    //Change address (recipient) to address[0] i.e. sender from metamask
   var tokens = await nftContract.methods.balanceOf(accounts[0]).call();
       console.log("No . of tokens: ",tokens," :for account",accounts[0]);
+      var myTokens = [];
 
     for (let i = 0; i < tokens; i++) {
 
         token_uri = await nftContract.methods.tokenURI(i).call();
 
         console.log("Token URI: ", token_uri, "Value: " ,i);
+        myTokens.push(token_uri);
+        
     }
+
+    sessionStorage.setItem("token", myTokens);
 
 
 }
