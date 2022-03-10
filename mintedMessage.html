@@ -155,11 +155,16 @@
         <script>
           var recepientAddress = sessionStorage.getItem("recepientAddress");
           var messageText = sessionStorage.getItem("messageText");
+
+          document.getElementById("recepientAddress").innerHTML = recepientAddress;
+          document.getElementById("messageText").innerHTML = messageText;          
+        </script>
+
+        <script>
           var IpfsHash =  sessionStorage.getItem("IpfsHash");
           var Timestamp =  sessionStorage.getItem("Timestamp");
           var NFT =  sessionStorage.getItem("token_uri");
-          document.getElementById("recepientAddress").innerHTML = recepientAddress;
-          document.getElementById("messageText").innerHTML = messageText;
+
           document.getElementById("IpfsHash").innerHTML = IpfsHash;
           document.getElementById("Timestamp").innerHTML = Timestamp;
 
