@@ -27,6 +27,8 @@
     pinData=data;
     console.log('IpfsHash:',pinData.IpfsHash);
     console.log('Timestamp',pinData.Timestamp);
+
+
     myCallback(data)
     })
     .catch((error) => {
@@ -57,6 +59,11 @@ async function myDisplayer(some) {
   document.getElementById("demo").innerHTML = some.IpfsHash;
   document.getElementById("demo2").innerHTML = some.Timestamp;
   console.log("callback object",some);
+
+  //var IpfsHash = some.IpfsHash;
+  //var Timestamp = some.Timestamp;  
+  sessionStorage.setItem("IpfsHash", some.IpfsHash);
+  sessionStorage.setItem("Timestamp", some.Timestamp);  
   
   var x = document.getElementById("recepientAddress").value;
   console.log("myDisplayer--> address",x);

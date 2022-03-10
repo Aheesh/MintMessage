@@ -5,17 +5,29 @@
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <script 
+    <script type="text/javascript" src="./utils.js"></script>
+    <script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>
+    <!--<script src="node_modules/@alch/alchemy-web3/dist/alchemyWeb3.min.js"></script>-->
+    
+    <script type="text/javascript" src="./uriFetch.js"></script>
+    <script type="text/javascript" src="./mint.js"></script>
+    
+
+    <!--<script 
       src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js" 
       integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw==" 
       crossorigin="anonymous" 
-      referrerpolicy="no-referrer">
-    </script>
-
+      referrerpolicy="no-referrer"
+      data-main="scripts/app" 
+      src="/Users/smiyumo/workarea/cmd/fintech/bootcamp/Fintech-Workspace/Python_Project/scripts/require.js"
+      >
+    </script>-->
+    
+    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Anon Communicator</title>
+    <title>Minted Message</title>
   
     <style>
       body {
@@ -120,9 +132,11 @@
     "
   >
     <div class="flex flex-col space-y-6">
-      <h1 class="text-center">Message Inbox</h1>
+      <h1 class="text-center">Anon Communicator</h1>
       <div  class="flex flex-col space-y-2">
 
+        <!--input type="button" id='loginButton' onclick="loginWithEth()" class="button" value="Connect to MetaMask"--><br>
+     
         <p id="userAddress" class="text-gray-600"></p>
 
         <button
@@ -134,18 +148,18 @@
         <br>
         <p>Recipient Address: <span id="recepientAddress"></span></p><br>
         <p>Message Sent: <span id="messageText"></span></p><br>
-        <!--p>IpfsHash: <span id="IpfsHash"></span></p><br>
-        <p>Timestamp: <span id="Timestamp"></span></p--><br>
+        <p>IpfsHash: <span id="IpfsHash"></span></p><br>
+        <p>Timestamp: <span id="Timestamp"></span></p><br>
 
         <script>
           var recepientAddress = sessionStorage.getItem("recepientAddress");
           var messageText = sessionStorage.getItem("messageText");
-          //var IpfsHash =  sessionStorage.getItem("IpfsHash");
-          //var Timestamp =  sessionStorage.getItem("Timestamp");
+          var IpfsHash =  sessionStorage.getItem("IpfsHash");
+          var Timestamp =  sessionStorage.getItem("Timestamp");
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;
-          //document.getElementById("IpfsHash").innerHTML = IpfsHash;
-          //document.getElementById("Timestamp").innerHTML = Timestamp;
+          document.getElementById("IpfsHash").innerHTML = IpfsHash;
+          document.getElementById("Timestamp").innerHTML = Timestamp;
 
         </script>
   
