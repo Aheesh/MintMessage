@@ -140,18 +140,18 @@
         <script>
           var recepientAddress = sessionStorage.getItem("recepientAddress");
           var messageText = sessionStorage.getItem("messageText");
-          //var IpfsHash =  sessionStorage.getItem("IpfsHash");
-          //var Timestamp =  sessionStorage.getItem("Timestamp");
+          
+          
           var myTokens = sessionStorage.getItem("myTokens");
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;
-          //document.getElementById("IpfsHash").innerHTML = IpfsHash;
-          //document.getElementById("Timestamp").innerHTML = Timestamp;
+          
+          
 
 
           // Loop through persons array and display all the values
           for(var i = 0; i < myTokens.length; i++){
-              document.write("<p>" + myTokens[i] + "</p>");
+              document.write("<p>NFT " + i + " : " + myTokens[i] + "</p>");
             }
 
         </script>
