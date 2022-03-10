@@ -1,14 +1,14 @@
 # MintMessage
 
-The following repository is for Anon Communicator application which mints annonymous messages that can then be sent between NFT owner and interestedy party to start a correspondence or show interest in the NTF.  
+The following repository is for Anon Communicator application which mints annonymous messages that can then be sent between NFT owner and interested party to start a correspondence or show interest in the NTF.  
 
 ![annon_communicator](Images/anon_communicator.jpg)
 
 # Anon Communicator: new application 
 
-This is a tool that helps in miniting annonymous messages to NFT owner to start correspondence on the NFT. 
+This is a tool that helps mint and send annonymous messages to a NFT owner to start correspondence on the NFT. 
  
-The current project is the inital design and development of the application to get MVP that can be tested on the current market cycle.
+The current project is the inital design and development of the application to get a MVP that can be tested on the current market cycle.
 
 ---
 
@@ -38,7 +38,7 @@ Before running the application first install the following dependencies.
 ---
 
 ## Usage
-run the following command from the directory where the files are (i.e scripts.js, uriFetch.js)
+Run the following command from the file directory (i.e scripts.js, uriFetch.js)
 
 python -m http.server
 
