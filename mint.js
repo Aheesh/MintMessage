@@ -72,8 +72,8 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
         myTokens.push(token_uri);
         
     }
-
-    sessionStorage.setItem("token", myTokens);
+    sessionStorage.setItem("token_uri", token_uri);
+    sessionStorage.setItem("myTokens", myTokens);
 
 
 }

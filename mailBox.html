@@ -142,7 +142,7 @@
           var messageText = sessionStorage.getItem("messageText");
           //var IpfsHash =  sessionStorage.getItem("IpfsHash");
           //var Timestamp =  sessionStorage.getItem("Timestamp");
-          var tokens = sessionStorage.getItem("tokens");
+          var myTokens = sessionStorage.getItem("myTokens");
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;
           //document.getElementById("IpfsHash").innerHTML = IpfsHash;
@@ -150,8 +150,8 @@
 
 
           // Loop through persons array and display all the values
-          for(var i = 0; i < tokens.length; i++){
-              document.write("<p>" + tokens[i] + "</p>");
+          for(var i = 0; i < myTokens.length; i++){
+              document.write("<p>" + myTokens[i] + "</p>");
             }
 
         </script>

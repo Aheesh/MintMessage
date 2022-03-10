@@ -150,12 +150,14 @@
         <p>Message Sent: <span id="messageText"></span></p><br>
         <p>IpfsHash: <span id="IpfsHash"></span></p><br>
         <p>Timestamp: <span id="Timestamp"></span></p><br>
+        <p>NFT: <span id="token_uri"></span></p><br>
 
         <script>
           var recepientAddress = sessionStorage.getItem("recepientAddress");
           var messageText = sessionStorage.getItem("messageText");
           var IpfsHash =  sessionStorage.getItem("IpfsHash");
           var Timestamp =  sessionStorage.getItem("Timestamp");
+          var NFT =  sessionStorage.getItem("token_uri");
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;
           document.getElementById("IpfsHash").innerHTML = IpfsHash;
