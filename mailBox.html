@@ -142,10 +142,17 @@
           var messageText = sessionStorage.getItem("messageText");
           //var IpfsHash =  sessionStorage.getItem("IpfsHash");
           //var Timestamp =  sessionStorage.getItem("Timestamp");
+          var tokens = sessionStorage.getItem("tokens");
           document.getElementById("recepientAddress").innerHTML = recepientAddress;
           document.getElementById("messageText").innerHTML = messageText;
           //document.getElementById("IpfsHash").innerHTML = IpfsHash;
           //document.getElementById("Timestamp").innerHTML = Timestamp;
+
+
+          // Loop through persons array and display all the values
+          for(var i = 0; i < tokens.length; i++){
+              document.write("<p>" + tokens[i] + "</p>");
+            }
 
         </script>
   
