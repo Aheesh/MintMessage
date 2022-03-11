@@ -154,18 +154,21 @@
         <input type="button" id='sendButton' onclick="" class="button" value="Send Message">
         <script type="text/javascript">
           document.getElementById("sendButton").onclick = function () {
-              location.href = "mintedMessage.html";
+              //location.href = "mintedMessage.html";
               buildJson();
               URI_Fetch(myDisplayer);
 
           };
         </script>
+
+<p id="demo"></p>
+<p id="demo2"></p>
     
       </div>
     </div>
   </div>
-    <p id="demo"></p>
-    <p id="demo2"></p>
+    <!--p id="demo"></p>
+    <p id="demo2"></p-->
 
     <script>
       //const { contractAddress } = require('./config');
@@ -186,7 +189,7 @@
       }
       </script>
 
-      <!--<script>
+      <script>
 
       window.userAddress = null;
       const loginButton = document.getElementById('loginButton')
@@ -256,8 +259,8 @@
         } else {
           alert("No ETH brower extension detected.");
         }
-      }  -->
-      
+      }  
+      </script>
       <script>
       /* Set the width of the side navigation to 250px */
       function openNav() {
