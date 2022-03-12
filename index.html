@@ -11,18 +11,7 @@
     
     <script type="text/javascript" src="./uriFetch.js"></script>
     <script type="text/javascript" src="./mint.js"></script>
-    
-
-    <!--<script 
-      src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.1/web3.min.js" 
-      integrity="sha512-GKw4QT/RccGJIwQxY3MhyiQ5pHrhQ8SuKFEafV+WcpOvtz7iYFQuQGFCvmGlHLctJTe8KrWU1FqvF7VOkEAJtw==" 
-      crossorigin="anonymous" 
-      referrerpolicy="no-referrer"
-      data-main="scripts/app" 
-      src="/Users/smiyumo/workarea/cmd/fintech/bootcamp/Fintech-Workspace/Python_Project/scripts/require.js"
-      >
-    </script>-->
-    
+     
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -114,8 +103,8 @@
     <div id="mySidenav" class="sidenav">
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <br><br>
-      <a href="index.html">Mint Message</a>
-      <a href="registerArt.html">Register Art</a>
+      <a href="index.html">Home</a>
+      <a href="registerArt.html">Mint Message</a>
       <a href="mailBox.html">Mail Box</a>
       <a href="about.html">About</a>      
     </div> 
@@ -134,8 +123,40 @@
     <div class="flex flex-col space-y-6">
       <h1 class="text-center">Anon Communicator</h1>
       <div  class="flex flex-col space-y-2">
+        <button id="loginButton" 
+        onclick="loginWithMetaMask()" 
+        class="
+        rounded
+        background-color: 
+        bg-red-700
+        border none;
+        hover:bg-red-600
+        py-2
+        px-4
+        text-white
+        hover:text-blue-700">Login with MetaMask</button>
+        <button id="signOutButton" 
+        onclick="signOutOfMetaMask()" 
+        class="hidden
+        rounded
+        background-color: 
+        bg-red-700
+        border none;
+        hover:bg-red-600
+        py-2
+        px-4
+        text-white
+        hover:text-blue-700">Sign out of MetaMask</button>
+        <p id="userWallet" class="text-lg text-gray-600 my-2"></p>
 
-        <input type="button" id='loginButton' onclick="loginWithEth()" class="button" value="Connect to MetaMask"><br>
+        <script>
+
+          window.addEventListener('DOMContentLoaded', () => {
+          toggleButton()
+
+          });
+
+        </script> 
      
         <p id="userAddress" class="text-gray-600"></p>
 
@@ -154,7 +175,7 @@
         <input type="button" id='sendButton' onclick="" class="button" value="Send Message">
         <script type="text/javascript">
           document.getElementById("sendButton").onclick = function () {
-              //location.href = "mintedMessage.html";
+              location.href = "mintedMessage.html";
               buildJson();
               URI_Fetch(myDisplayer);
 
@@ -167,8 +188,6 @@
       </div>
     </div>
   </div>
-    <!--p id="demo"></p>
-    <p id="demo2"></p-->
 
     <script>
       //const { contractAddress } = require('./config');
@@ -187,33 +206,87 @@
         document.getElementById("demo").innerHTML = myObj.address;
         //document.getElementById("demo").innerHTML = myObj.message;
       }
-      </script>
-
-      <script>
 
       window.userAddress = null;
+      window.userWalletAddress = null;
       const loginButton = document.getElementById('loginButton')
-      window.onload = async () => {
-        // Init Web3 connected to ETH network
-        if (window.ethereum) {
-          window.web3 = new Web3(window.ethereum);
-        } else {
-          alert("No ETH brower extension detected.");
+      const userWallet = document.getElementById('userWallet')
+
+      function toggleButton(){
+        if(!window.ethereum){
+          loginButton.innerText = 'Metamask is not installed'
+          loginButton.classList.remove()
+          loginButton.classList.add()
+          return false
         }
-  
-        // Load in Localstore key
-        window.userAddress = window.localStorage.getItem("userAddress");
-        showAddress();
-      };
-  
-      // Use this function to turn a 42 character ETH address
-      // into an address like 0x345...12345
-      function truncateAddress(address) {
-        if (!address) {
-          return "";
-        }
-        return `${address}`;
+
       }
+
+      async function loginWithMetaMask() {
+            const accounts = await window.ethereum.request({method: 'eth_requestAccounts'})
+                .catch((e) => {
+                    console.error(e.message)
+                    return
+                })
+            if (!accounts){ return}
+
+            // Load in Localstore key
+            window.userAddress = window.localStorage.getItem("userAddress");
+            showAddress();
+            
+            window.userWalletAddress = accounts[0]
+            userWallet.innerText = window.userWalletAddress
+            //loginButton.innerText = 'Sign out of MetaMast'
+            document.getElementById("loginButton").classList.add("hidden");
+            //document.getElementById("loginButton").hidden=true;
+            //document.getElementById("singOutButton").hidden=false;
+            document.getElementById("signOutButton").classList.remove("hidden");
+            //document.getElementById("signOutButton").classList.add("button");
+
+            loginButton.removeEventListener('click', loginWithMetaMask)
+            setTimeout(() => {
+              signOutButton.addEventListener('click', signOutOfMetaMask)
+
+              //location.reload(true);
+            }, 200)
+
+        }
+
+
+        function signOutOfMetaMask() {
+            window.userWalletAddress = null
+            userWallet.innerText = ''
+            //loginButton.innerText = 'Sign in with MetaMask'
+            document.getElementById("signOutButton").classList.add("hidden");
+            document.getElementById("loginButton").classList.remove("hidden");
+
+            window.userAddress = null;
+            window.localStorage.removeItem("userAddress");
+            showAddress();
+
+
+            loginButton.removeEventListener('click', signOutOfMetaMask)
+            setTimeout(() => {
+                loginButton.addEventListener('click', loginWithMetaMask)
+                //location.reload(true);
+            }, 200)
+
+        }
+
+        // Display or remove the users know address on the frontend
+        function showAddress() {
+          if (!window.userAddress) {
+            document.getElementById("userAddress").innerText = "";
+            document.getElementById("logoutButton").classList.add("hidden");
+            return false;
+          }
+  
+          document.getElementById(
+            "userAddress"
+          ).innerText = `ETH Address: ${truncateAddress(window.userAddress)}`;
+          document.getElementById("logoutButton").classList.remove("hidden");
+        }        
+
   
       // Display or remove the users know address on the frontend
       function showAddress() {
@@ -225,43 +298,10 @@
   
         document.getElementById(
           "userAddress"
-        ).innerText = `ETH Address: ${truncateAddress(window.userAddress)}`;
+        ).innerText = `ETH Address: ${window.userAddress}`;
         document.getElementById("logoutButton").classList.remove("hidden");
       }
   
-      // remove stored user address and reset frontend
-      function logout() {
-        window.userAddress = null;
-        window.localStorage.removeItem("userAddress");
-        showAddress();
-      }      
-
-      // Login with Web3 via Metamasks window.ethereum library
-      async function loginWithEth() {
-        if (window.web3) {
-          try {
-            // We use this since ethereum.enable() is deprecated. This method is not
-            // available in Web3JS - so we call it directly from metamasks' library
-            const selectedAccount = await window.ethereum
-              .request({
-                method: "eth_requestAccounts",
-              })
-              .then((accounts) => accounts[0])
-              .catch(() => {
-                throw Error("No account selected!");
-              });
-            window.userAddress = selectedAccount;
-            window.localStorage.setItem("userAddress", selectedAccount);
-            showAddress();
-          } catch (error) {
-            console.error(error);
-          }
-        } else {
-          alert("No ETH brower extension detected.");
-        }
-      }  
-      </script>
-      <script>
       /* Set the width of the side navigation to 250px */
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
