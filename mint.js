@@ -4,9 +4,6 @@
 //step 3: Define the minting function
 async function mintNFT(address,tokenURI) {
 
- //step 1: You define your variables from .env file
-//const API_URL = "https://eth-ropsten.alchemyapi.io/v2/yI0ys4zjxaeAalEKko5W8YFLPp6vo2IB";
-
 //const PUBLIC_KEY = "0xf827C1078d44316653F17BF10a085Aa2D0ea40Fe";
 //const PRIVATE_KEY = "c35e209335abc944b61ea593e8ffa1670fef2b529b7a54a7f0ba1e6d58fb5227";
 //Owen's key
@@ -15,15 +12,6 @@ async function mintNFT(address,tokenURI) {
 //const PUBLIC_KEY ="0x61a41cAc3bA62b00b53a1D94C4f9233B530858C8"
 //const PRIVATE_KEY="427750cbe02e75056f17bc0ec437098474bf592bf8f15eca26bb8212d4fe6d41"
 
-//const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
-
-
-//step 2: Define our contract ABI (Application Binary Interface) & adresses
-
- 
-//const { createAlchemyWeb3 } = await fetch("@alch/alchemy-web3");
-//const { createAlchemyWeb3 } = await fetch("./node_modules/@alch/alchemy-web3");
-//const web3 = createAlchemyWeb3(API_URL);
 console.log("***** In mintNFT()****",address,tokenURI);
 //const web3 = await getWeb3();
 const web3 = new Web3(window.ethereum);
@@ -39,7 +27,7 @@ var contractAddress;
 // Ropsten contract address  
 if (ChainID == 3) {
   console.log("Setting Contract to Ropsten Testnet Address")
-  contractAddress = "0xa8E381CaB19732aE8aDFE8A94d2dA2b8b5a97c78"; //Ropesten network contract 
+  contractAddress = "0xa8E381CaB19732aE8aDFE8A94d2dA2b8b5a97c78"; //Ropsten network contract 
 } else if (ChainID==5777) { 
   // SET GANACHE CONTRACT ADDRESS HERE
   console.log("Setting Contract to Local Ganache Address")
@@ -56,45 +44,30 @@ console.log("getContract() abistring object--> ",abistring);
 
 const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
-  /*const nonce = await web3.eth.getTransactionCount(accounts[0], 'latest'); //get latest nonce
-
-  //the transaction
-  const tx = {
-    'from': accounts[0],
-    'to': contractAddress,
-    'nonce': nonce,
-    'gas': 500000,
-    //'maxPriorityFeePerGas': 2000000,
-    'data': nftContract.methods.registerArtwork(address, tokenURI).encodeABI()
-  };
-
-  //step 4: Sign the transaction
-  const signedTx = await web3.eth.accounts.signTransaction(tx, PRIVATE_KEY);
-  const transactionReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-  */
-
- 
-
   const transactionReceipt = await nftContract.methods.registerArtwork(address,tokenURI).send({from:accounts[0]});
 
   console.log(`Transaction receipt: ${JSON.stringify(transactionReceipt)}`);
   
-   //Change address (recipient) to address[0] i.e. sender from metamask
+  //For inbox functionality
+  // Get no. of tokens for a wallet address.
+  // get the token ids owned by the wallet address.
   var tokens = await nftContract.methods.balanceOf(accounts[0]).call();
       console.log("No . of tokens: ",tokens," :for account",accounts[0]);
 
-      
+  const tokens_inbox =[];  
+  var token_URI;  
 
     for (let i = 0; i < tokens; i++) {
 
-        token_uri = await nftContract.methods.tokenURI(i).call();
-
-        console.log("Token URI: ", token_uri, "Value: " ,i);
+        token_index = await nftContract.methods.tokenOfOwnerByIndex(address,i).call();
+        token_URI= await nftContract.methods.tokenURI(token_index).call();
+        console.log("Token Index: ", token_index, "Value: " ,i,"Message URI:",token_URI);
+        tokens_inbox.push(token_index);
         
     }
-    
-
-
+  
+    console.log("The list of token ids for inbox",tokens_inbox);
+ 
 }
 
 //step 5: Call the mintNFT function
