@@ -182,24 +182,7 @@
     </div>
   </div>
 
-    <script>
-      //const { contractAddress } = require('./config');
-      function buildJson() {
-        var y = document.getElementById("messageArea").value;
-        var x = document.getElementById("recepientAddress").value;
-        sessionStorage.setItem("recepientAddress", x);
-        sessionStorage.setItem("messageText", y);
-
-        var f = '{"address" :"'+x +'", "message" :"' +y +' "}'
-        console.log(f)
-        //const myJSON= '{"address":"0x123456", "message":"I want to buy your NFT"}';
-        //const myObj = JSON.parse(myJSON);
-
-        const myObj = JSON.parse(f);
-        document.getElementById("demo").innerHTML = myObj.address;
-        //document.getElementById("demo").innerHTML = myObj.message;
-      }
-
+      <script>
       window.userAddress = null;
       window.userWalletAddress = null;
       const loginButton = document.getElementById('loginButton')
