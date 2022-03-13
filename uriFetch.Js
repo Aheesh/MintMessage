@@ -2,7 +2,7 @@
 {
     var y = document.getElementById("messageArea").value;
     var x = document.getElementById("recepientAddress").value;
-    var f = '{"address" :"'+x +'", "message" :"' +y +' "}'
+    var f = '{"Recipient address is" :"'+x +'", "message to be sent" :"' +y +' "}'
     console.log(f)
     
     //const myJSON= '{"address":"0x123456", "message":"I want to buy your NFT"}';
