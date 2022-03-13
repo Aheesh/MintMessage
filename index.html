@@ -172,15 +172,8 @@
         <label for="messageArea">Message Area</label>
         <textarea id="messageArea" name="SenderMessage" rows="7" cols="30">Message for the NFT Owner - Interested, will pay 10 ETH</textarea><br>
     
-        <input type="button" id='sendButton' onclick="" class="button" value="Send Message">
-        <script type="text/javascript">
-          document.getElementById("sendButton").onclick = function () {
-              location.href = "mintedMessage.html";
-              buildJson();
-              URI_Fetch(myDisplayer);
-
-          };
-        </script>
+        <input type="button" id='sendButton' onclick="URI_Fetch(myDisplayer)" class="button" value="Send Message">
+        
 
 <p id="demo"></p>
 <p id="demo2"></p>
