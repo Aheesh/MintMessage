@@ -56,20 +56,33 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
   const tokens_inbox =[];  
   var token_URI;  
+  let body = document.body;
+  let tbl = document.createElement('table');
+  tbl.style.width= '200px';
+  tbl.style.border = '1px solid black'
 
     for (let i = 0; i < tokens; i++) {
 
         token_index = await nftContract.methods.tokenOfOwnerByIndex(address,i).call();
         token_URI= await nftContract.methods.tokenURI(token_index).call();
         console.log("Token Index: ", token_index, "Value: " ,i,"Message URI:",token_URI);
-        tokens_inbox.push(token_index);
+        let tr=tbl.insertRow();
         
-    }
-  
+        for (let j=0; j < 1 ; j++) {
+          let td=tr.insertCell();
+          td.appendChild(document.createTextNode(`${token_index},<a> ipfs.io/ipfs/${token_URI}`));
+          td.style.border='1px solid black';
+        }
+        tokens_inbox.push(token_index);
+       
+      }
+      body.appendChild(tbl);
+
     console.log("The list of token ids for inbox",tokens_inbox);
  
 }
 
 //step 5: Call the mintNFT function
 //mintNFT("ipfs.io/ipfs/QmVHfZxFXhoGMzaMyjLV547hGRTjKmZe8mYAk65npuxcW3");
+
 
