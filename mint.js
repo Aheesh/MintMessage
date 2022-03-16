@@ -63,14 +63,23 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
     for (let i = 0; i < tokens; i++) {
 
-        token_index = await nftContract.methods.tokenOfOwnerByIndex(address,i).call();
+        token_index = await nftContract.methods.tokenOfOwnerByIndex(accounts[0],i).call();
         token_URI= await nftContract.methods.tokenURI(token_index).call();
         console.log("Token Index: ", token_index, "Value: " ,i,"Message URI:",token_URI);
         let tr=tbl.insertRow();
         
         for (let j=0; j < 1 ; j++) {
           let td=tr.insertCell();
-          td.appendChild(document.createTextNode(`${token_index},<a> ipfs.io/ipfs/${token_URI}`));
+          //Build the ipfs link 
+          var a = document.createElement('a');
+          var linkText = document.createTextNode(`Message link here`);
+          a.appendChild(linkText);
+          a.title=`Message link`;
+          a.href=`https://ipfs.io/ipfs/${token_URI}`;
+          a.style.color=("#0000FF");
+          console.log("A value",a);
+          td.appendChild(document.createTextNode(`${token_index}`));
+          td.append(a);
           td.style.border='1px solid black';
         }
         tokens_inbox.push(token_index);
