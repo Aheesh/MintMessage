@@ -54,6 +54,7 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
   var tokens = await nftContract.methods.balanceOf(accounts[0]).call();
       console.log("No . of tokens: ",tokens," :for account",accounts[0]);
 
+  // Build the message inbox    
   const tokens_inbox =[];  
   var token_URI;  
   let body = document.body;
@@ -91,7 +92,5 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
  
 }
 
-//step 5: Call the mintNFT function
-//mintNFT("ipfs.io/ipfs/QmVHfZxFXhoGMzaMyjLV547hGRTjKmZe8mYAk65npuxcW3");
 
 
