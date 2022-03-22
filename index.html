@@ -7,7 +7,6 @@
     />
     <script type="text/javascript" src="./utils.js"></script>
     <script type="text/javascript" src="node_modules/web3/dist/web3.min.js"></script>
-    <!--<script src="node_modules/@alch/alchemy-web3/dist/alchemyWeb3.min.js"></script>-->
     
     <script type="text/javascript" src="./uriFetch.js"></script>
     <script type="text/javascript" src="./mint.js"></script>
@@ -157,8 +156,9 @@
           });
 
         </script> 
-     
-        <p id="userAddress" class="text-gray-600"></p>
+       <label for="Sender Address">Sender Wallet Address</label>
+       <input type="text" id="userAddress" name="SenderAddress" value=""><br>
+        <!--<p id="userAddress" class="text-gray-600"></p>-->
 
         <button
          id="logoutButton"
@@ -166,7 +166,7 @@
          class="hidden text-blue-500 underline">
          Logout
         </button>        
-        <label for="recepientAddress">Recipient Address</label>
+        <label for="recepientAddress">Recipient Wallet Address</label>
         <input type="text" id="recepientAddress" name="recepientAddress" value="0xCDE58FC11b7Ce950D0E872e16Bb0B2418F4f1352"><br>
     
         <label for="messageArea">Message Area</label>
@@ -211,7 +211,11 @@
             showAddress();
             
             window.userWalletAddress = accounts[0]
-            userWallet.innerText = window.userWalletAddress
+            //Stop the gray text showing the wallet address.
+            //userWallet.innerText = window.userWalletAddress
+              
+            document.getElementById("userAddress").value=window.userWalletAddress;
+            console.log("Checking the sender address in loginWithMetaMask()",window.userWalletAddress);
             //loginButton.innerText = 'Sign out of MetaMast'
             document.getElementById("loginButton").classList.add("hidden");
             //document.getElementById("loginButton").hidden=true;
@@ -247,21 +251,7 @@
                 //location.reload(true);
             }, 200)
 
-        }
-
-        // Display or remove the users know address on the frontend
-        function showAddress() {
-          if (!window.userAddress) {
-            document.getElementById("userAddress").innerText = "";
-            document.getElementById("logoutButton").classList.add("hidden");
-            return false;
-          }
-  
-          document.getElementById(
-            "userAddress"
-          ).innerText = `ETH Address: ${truncateAddress(window.userAddress)}`;
-          document.getElementById("logoutButton").classList.remove("hidden");
-        }        
+        }      
 
   
       // Display or remove the users know address on the frontend
@@ -277,7 +267,8 @@
         ).innerText = `ETH Address: ${window.userAddress}`;
         document.getElementById("logoutButton").classList.remove("hidden");
       }
-  
+    </script>
+    <!--<script>
       /* Set the width of the side navigation to 250px */
       function openNav() {
         document.getElementById("mySidenav").style.width = "250px";
@@ -301,7 +292,7 @@
         document.getElementById("main").style.marginLeft = "0";
         document.body.style.backgroundColor = "white";
       } 
-      
-     </script>
+    </script> -->
+     
 </body>
 </html>
