@@ -1,8 +1,10 @@
-
+//import EthCrypto from 'eth-crypto';
+//const EthCrypto = require('eth-crypto');
 
 
 //step 3: Define the minting function
 async function mintNFT(address,tokenURI) {
+
 
 //const PUBLIC_KEY = "0xf827C1078d44316653F17BF10a085Aa2D0ea40Fe";
 //const PRIVATE_KEY = "c35e209335abc944b61ea593e8ffa1670fef2b529b7a54a7f0ba1e6d58fb5227";
@@ -31,7 +33,7 @@ if (ChainID == 3) {
 } else if (ChainID==5777) { 
   // SET GANACHE CONTRACT ADDRESS HERE
   console.log("Setting Contract to Local Ganache Address")
-  contractAddress = "0xeF163dF8Dc1d0aa44B7A2E7be63b87f4C3f32f27"; //Ganache - local address 
+  contractAddress = "0x0cdba2Bd0d503cb16c46f74dE2E231244Aba6B88"; //Ganache - local address 
 } else {
   console.log("Network not configured for contract call in Mint.js")
 }
@@ -42,6 +44,18 @@ var abistring=await getContract_abi.json();
 console.log("getContract() typeof abistring--> ",typeof(abistring));
 console.log("getContract() abistring object--> ",abistring);
 
+/*
+// Encrypt the tokenURI with recipient's public wallet address
+const encryptedIPFS = await EthCrypto.encryptWithPublicKey( 
+  address,
+  JSON.stringify(tokenURI)
+);
+
+console.log("encrypted IPFS ",encryptedIPFS);
+const encryptedString = EthCrypto.cipher.stringify(encryptedIPFS);
+console.log("encrypted smaller string-representation",encryptedString);*/
+
+// Contract connection set-up
 const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
   const transactionReceipt = await nftContract.methods.registerArtwork(address,tokenURI).send({from:accounts[0]});
@@ -66,6 +80,16 @@ const nftContract = await new web3.eth.Contract(abistring, contractAddress);
 
         token_index = await nftContract.methods.tokenOfOwnerByIndex(accounts[0],i).call();
         token_URI= await nftContract.methods.tokenURI(token_index).call();
+        /*
+        // Decrypting string to get IPFS hash
+        var encryptedObject = EthCrypto.cipher.parse(token_URI);
+        var decrypted = await EthCrypto.decryptWithPrivateKey(
+          address[0].privateKey,
+          encryptedObject
+        )
+        var decryptedPayload = JSON.parse(decrypted);
+        // End of decrypting IPFS */
+
         console.log("Token Index: ", token_index, "Value: " ,i,"Message URI:",token_URI);
         let tr=tbl.insertRow();
         
